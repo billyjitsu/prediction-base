@@ -1,5 +1,5 @@
 module.exports = [
-    "Ape Coin",
-    "APE"
+    "0xa0AD79D995DdeeB18a14eAef56A549A04e3Aa1Bd",
+    "0xb8EAa40a7976474a47bB48291FE569f383069FBc"
   ];
   

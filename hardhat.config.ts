@@ -43,6 +43,10 @@ networks: {
 },
 etherscan: {
 apiKey: process.env.BASE_API_KEY || ""
+},
+
+sourcify: {
+  enabled: true
 }
 };
 
