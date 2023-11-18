@@ -17,7 +17,9 @@ import {
 import React, { useState, useEffect } from "react";
 import LoadingScreen from "./Loading";
 import { parseEther } from "viem";
-import YoutubeContract from "../contract/contract.json";
+import { encode, decode } from '@api3/airnode-abi';
+import PredictionContract from "../contract/contract.json";
+import ApeContract from "../contract/ape.json";
 
 
 const Intro = () => {
@@ -32,10 +34,16 @@ const Intro = () => {
   const [youtubeId, setYoutubeId] = useState<string>("");
 
   const contractAddress = "0xBA18f2DC2Ce0B971f33236fdf76E227bf9D8dDBd";
+  //Constants for ainrnod deployed to Base Testnet
+  //taken from the sportsmonk airnode configes
+  const airnode = "0xbBaf8B6C5d1C9fBCBf2A45f4b7b450415F936a92";
+  // This call is season winner endpoint
+  const endPoint = "0x6e58ace4ab94d28da59ec1da675b513cc21a3ca9656228c0b052563a2eb88b3e";
+  const sponsorWallet = "0x6c33312c753cAc450fD800D297E019135895bc0B";
 
   const contractConfig = {
     address: contractAddress,
-    abi: YoutubeContract.abi,
+    abi: PredictionContract.abi,
   };
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -43,16 +51,21 @@ const Intro = () => {
     setYoutubeId(event.target.value);
   };
 
-  const handlePredictionInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  //Chose racer number
+  const handlePredictionInputChange = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
     setPredictionInput(event.target.value);
     //setYoutubeId(event.target.value);
   };
 
+  //Choose amount of eth
   const handleETHInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setEthAmount(Number(event.target.value));
     //setYoutubeId(event.target.value);
   };
 
+  //Choose amount of Ape Insurance
   const handleApeInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setApeAmount(Number(event.target.value));
     //setYoutubeId(event.target.value);
@@ -61,19 +74,21 @@ const Intro = () => {
   const handleSubmit = () => {
     // Handle the submission of the YouTube ID here
     sendRequest();
-    console.log("YouTube ID:", inputValue);
+   // console.log("Value:", inputValue);
   };
 
-  const handleBet = async (position: number) => {
+  const handleBet = async () => {
     //const parsedEth = ethers.utils.parseEther() || 0;
-    console.log("Position: ", position);
+    console.log("Prediction Input: ", predictionInput);
+    console.log("ETH Amount: ", ethAmount);
+    console.log("Ape Amount: ", apeAmount);
     try {
       const { hash } = await writeContract({
         address: contractAddress,
-        abi: YoutubeContract.abi,
+        abi: PredictionContract.abi,
         functionName: "placeBet",
-        args: [position], //set positions
-        value: parseEther((0.001).toString()),
+        args: [predictionInput, parseEther((apeAmount).toString())], //set positions
+        value: parseEther((ethAmount).toString()),
       });
       setLoading(true);
       await waitForTransaction({
@@ -89,11 +104,12 @@ const Intro = () => {
 
   const sendRequest = async () => {
     try {
+      let params = await generateParameters();
       const { hash } = await writeContract({
         address: contractAddress,
-        abi: YoutubeContract.abi,
-        functionName: "request",
-        args: [youtubeId], 
+        abi: PredictionContract.abi,
+        functionName: "makeRequest",
+        args: [airnode, endPoint, contractAddress, sponsorWallet, params],
       });
       setLoading(true);
       await waitForTransaction({
@@ -102,6 +118,24 @@ const Intro = () => {
 
       setLoading(false);
       setMinted(true);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const generateParameters = async () => {
+    try {
+      const params = [
+        { type: "string", name: "seasonID", value: "6" },
+        { type: "string", name: "_path", value: "data.0.id" },
+        { type: "string", name: "_type", value: "int256" },
+     ];
+     
+     const encodedData = encode(params);
+     //console.log("Decoded data:", decode(encodedData));
+     console.log("Encoded data:", encodedData);
+     return encodedData;
+
     } catch (error) {
       console.log(error);
     }
@@ -128,78 +162,130 @@ const Intro = () => {
                         <p className="text-white text-center text-xl">
                           F1 Season Six Grand Prix
                         </p>
-                        <p className="text-white text-center">
+
+                        <div className="overflow-x-auto relative">
+                          <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+                            <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                              <tr>
+                                <th scope="col" className="py-3 px-6">
+                                  Name
+                                </th>
+                                <th scope="col" className="py-3 px-6">
+                                  Number
+                                </th>
+                                <th scope="col" className="py-3 px-6">
+                                  Team
+                                </th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                                <td className="py-4 px-6">Max Verstappen</td>
+                                <td className="py-4 px-6">1</td>
+                                <td className="py-4 px-6">Red Bull Racing</td>
+                              </tr>
+                              <tr className="bg-gray-50 dark:bg-gray-900">
+                                <td className="py-4 px-6">Logan Sargeant</td>
+                                <td className="py-4 px-6">2</td>
+                                <td className="py-4 px-6">Williams</td>
+                              </tr>
+                              <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                                <td className="py-4 px-6">Daniel Ricciardo</td>
+                                <td className="py-4 px-6">3</td>
+                                <td className="py-4 px-6">AlphaTauri</td>
+                              </tr>
+                              <tr className="bg-gray-50 dark:bg-gray-900">
+                                <td className="py-4 px-6">Lando Norris</td>
+                                <td className="py-4 px-6">4</td>
+                                <td className="py-4 px-6">McLaren</td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+
+                        {/* <p className="text-white text-center">
                           Using an offchain oracle, we will determine the number
                           of views in a trustless manner
-                        </p>
+                        </p> */}
 
                         <div className="flex flex-col justify-center items-center">
                           <div>
-                          <p className="text-white "> Place your prediction</p>
-                          <input
-                            type="text"
-                            placeholder="Racer ID Number"
-                            value={predictionInput}
-                            onChange={handlePredictionInputChange}
-                            className="border px-2 py-1"
-                          />
+                            <p className="text-white ">
+                              {" "}
+                              Place your prediction
+                            </p>
+                            <input
+                              type="text"
+                              placeholder="Racer ID Number"
+                              value={predictionInput}
+                              onChange={handlePredictionInputChange}
+                              className="border px-2 py-1"
+                            />
                           </div>
 
                           <div>
-                          <p className="text-white "> ETH Wager</p>
-                          <input
-                            type="text"
-                            placeholder="ETH Amount"
-                            value={ethAmount}
-                            onChange={handleETHInputChange}
-                            className="border px-2 py-1"
-                          />
+                            <p className="text-white "> ETH Wager</p>
+                            <input
+                              type="number"
+                              placeholder="ETH Amount"
+                              value={ethAmount}
+                              onChange={handleETHInputChange}
+                              className="border px-2 py-1"
+                            />
                           </div>
 
                           <div>
-                          <p className="text-white "> Insure with Ape Coin?</p>
-                          <input
-                            type="text"
-                            placeholder="Insure Position with APE coin?"
-                            value={apeAmount}
-                            onChange={handleApeInputChange}
-                            className="border px-2 py-1"
-                          />
-                          { apeAmount >0 &&
-                          (<button
-                          //  onClick={handleSubmit} //place bet
-                            className="bg-blue-500 px-4 py-2 text-white ml-2"
-                          >
-                            Allow
-                          </button>)
-                          }
-
+                            <p className="text-white ">
+                              {" "}
+                              Insure with Ape Coin?
+                            </p>
+                            <input
+                              type="text"
+                              placeholder="Insure Position with APE coin?"
+                              value={apeAmount}
+                              onChange={handleApeInputChange}
+                              className="border px-2 py-1"
+                            />
+                            {apeAmount > 0 && (
+                              <button
+                                //  onClick={handleSubmit} //place bet
+                                className="bg-blue-500 px-4 py-2 text-white ml-2"
+                              >
+                                Allow
+                              </button>
+                            )}
                           </div>
                           <button
-                          //  onClick={handleSubmit} //place bet
+                            onClick={handleBet} //place bet
                             className="bg-blue-500 px-4 py-2 text-white ml-2"
                           >
                             Submit
                           </button>
                         </div>
 
-                        <div className="items-center text-center pt-20">
-                        <p className="text-white "> admin only</p>
-                          <input
+                        <div className="items-center text-center pt-5">
+                          <p className="text-white "> admin only</p>
+                          {/* <input
                             type="text"
                             placeholder="Enter YouTube ID"
                             value={inputValue}
                             onChange={handleInputChange}
                             className="border px-2 py-1"
-                          />
-                          
+                          /> */}
+
                           <button
                             onClick={handleSubmit}
                             className="bg-blue-500 px-4 py-2 text-white ml-2"
                           >
-                            Submit
+                            Pull the results
                           </button>
-                          
+
+                          {/* <button
+                            onClick={generateParameters}
+                            className="bg-blue-500 px-4 py-2 text-white ml-2"
+                          >
+                            test
+                          </button> */}
                         </div>
                       </>
                     )}
