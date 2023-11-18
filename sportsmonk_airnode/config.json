@@ -1,0 +1,1256 @@
+{
+  "apiCredentials": [
+    {
+      "oisTitle": "SportMonks Final",
+      "securitySchemeName": "SportMonksFinalSecurityScheme1ApiKey",
+      "securitySchemeValue": "${SPORTMONKS_FINAL_SECURITY_SCHEME_1_API_KEY_VALUE}"
+    }
+  ],
+  "chains": [
+    {
+      "authorizations": {
+        "requesterEndpointAuthorizations": {}
+      },
+      "authorizers": {
+        "crossChainRequesterAuthorizers": [],
+        "crossChainRequesterAuthorizersWithErc721": [],
+        "requesterAuthorizersWithErc721": [],
+        "requesterEndpointAuthorizers": []
+      },
+      "blockHistoryLimit": 300,
+      "contracts": {
+        "AirnodeRrp": "0xa0AD79D995DdeeB18a14eAef56A549A04e3Aa1Bd"
+      },
+      "id": "84531",
+      "maxConcurrency": 50,
+      "minConfirmations": 0,
+      "options": {
+        "fulfillmentGasLimit": 500000,
+        "gasPriceOracle": [
+          {
+            "gasPriceStrategy": "providerRecommendedGasPrice",
+            "recommendedGasPriceMultiplier": 1.2
+          },
+          {
+            "gasPrice": {
+              "unit": "gwei",
+              "value": 10
+            },
+            "gasPriceStrategy": "constantGasPrice"
+          }
+        ],
+        "withdrawalRemainder": {
+          "unit": "wei",
+          "value": 0
+        }
+      },
+      "providers": {
+        "baseGoerliPublic": {
+          "url": "https://goerli.base.org"
+        },
+        "baseGoerliTestnet1": {
+          "url": "${BASE_GOERLI_TESTNET_1_PROVIDER_URL}"
+        }
+      },
+      "type": "evm"
+    },
+    {
+      "authorizations": {
+        "requesterEndpointAuthorizations": {}
+      },
+      "authorizers": {
+        "crossChainRequesterAuthorizers": [],
+        "crossChainRequesterAuthorizersWithErc721": [],
+        "requesterAuthorizersWithErc721": [],
+        "requesterEndpointAuthorizers": []
+      },
+      "blockHistoryLimit": 60,
+      "contracts": {
+        "AirnodeRrp": "0xa0AD79D995DdeeB18a14eAef56A549A04e3Aa1Bd"
+      },
+      "id": "5",
+      "maxConcurrency": 50,
+      "minConfirmations": 0,
+      "options": {
+        "fulfillmentGasLimit": 500000,
+        "gasPriceOracle": [
+          {
+            "gasPriceStrategy": "providerRecommendedGasPrice",
+            "recommendedGasPriceMultiplier": 1.2
+          },
+          {
+            "gasPrice": {
+              "unit": "gwei",
+              "value": 10
+            },
+            "gasPriceStrategy": "constantGasPrice"
+          }
+        ],
+        "withdrawalRemainder": {
+          "unit": "wei",
+          "value": 0
+        }
+      },
+      "providers": {
+        "goerliPublic": {
+          "url": "https://goerli.reblok.io/public"
+        },
+        "goerliTestnet1": {
+          "url": "${GOERLI_TESTNET_1_PROVIDER_URL}"
+        }
+      },
+      "type": "evm"
+    }
+  ],
+  "nodeSettings": {
+    "airnodeWalletMnemonic": "${AIRNODE_WALLET_MNEMONIC}",
+    "cloudProvider": {
+      "disableConcurrencyReservations": true,
+      "region": "us-east-1",
+      "type": "aws"
+    },
+    "heartbeat": {
+      "apiKey": "${HEARTBEAT_API_KEY}",
+      "enabled": true,
+      "url": "${HEARTBEAT_URL}"
+    },
+    "httpGateway": {
+      "corsOrigins": [],
+      "enabled": true,
+      "maxConcurrency": 20
+    },
+    "httpSignedDataGateway": {
+      "corsOrigins": [],
+      "enabled": true,
+      "maxConcurrency": 20
+    },
+    "logFormat": "plain",
+    "logLevel": "INFO",
+    "nodeVersion": "0.13.0",
+    "oevGateway": {
+      "corsOrigins": [],
+      "enabled": true,
+      "maxConcurrency": 20
+    },
+    "stage": "sportmonks-base"
+  },
+  "ois": [
+    {
+      "apiSpecifications": {
+        "components": {
+          "securitySchemes": {
+            "SportMonksFinalSecurityScheme1ApiKey": {
+              "in": "query",
+              "name": "api_token",
+              "type": "apiKey"
+            }
+          }
+        },
+        "paths": {
+          "/drivers/season/{ID}": {
+            "get": {
+              "parameters": [
+                {
+                  "in": "path",
+                  "name": "ID"
+                },
+                {
+                  "in": "query",
+                  "name": "query"
+                }
+              ]
+            }
+          },
+          "/drivers/{ID}": {
+            "get": {
+              "parameters": [
+                {
+                  "in": "path",
+                  "name": "ID"
+                },
+                {
+                  "in": "query",
+                  "name": "include"
+                }
+              ]
+            }
+          },
+          "/drivers/{ID}/season/{seasonID}/results": {
+            "get": {
+              "parameters": [
+                {
+                  "in": "path",
+                  "name": "ID"
+                },
+                {
+                  "in": "path",
+                  "name": "seasonID"
+                },
+                {
+                  "in": "query",
+                  "name": "include"
+                }
+              ]
+            }
+          },
+          "/seasons": {
+            "get": {
+              "parameters": [
+                {
+                  "in": "query",
+                  "name": "include"
+                }
+              ]
+            }
+          },
+          "/seasons/{ID}": {
+            "get": {
+              "parameters": [
+                {
+                  "in": "query",
+                  "name": "include"
+                },
+                {
+                  "in": "path",
+                  "name": "ID"
+                }
+              ]
+            }
+          },
+          "/stages": {
+            "get": {
+              "parameters": [
+                {
+                  "in": "query",
+                  "name": "include"
+                }
+              ]
+            }
+          },
+          "/stages/season/{season_ID}": {
+            "get": {
+              "parameters": [
+                {
+                  "in": "path",
+                  "name": "season_ID"
+                },
+                {
+                  "in": "query",
+                  "name": "include"
+                }
+              ]
+            }
+          },
+          "/stages/{ID}": {
+            "get": {
+              "parameters": [
+                {
+                  "in": "path",
+                  "name": "ID"
+                },
+                {
+                  "in": "query",
+                  "name": "include"
+                }
+              ]
+            }
+          },
+          "/teams/season/{ID}": {
+            "get": {
+              "parameters": [
+                {
+                  "in": "path",
+                  "name": "ID"
+                },
+                {
+                  "in": "query",
+                  "name": "include"
+                }
+              ]
+            }
+          },
+          "/teams/{ID}": {
+            "get": {
+              "parameters": [
+                {
+                  "in": "path",
+                  "name": "ID"
+                },
+                {
+                  "in": "query",
+                  "name": "include"
+                }
+              ]
+            }
+          },
+          "/teams/{ID}/season/{seasonID}/results": {
+            "get": {
+              "parameters": [
+                {
+                  "in": "path",
+                  "name": "ID"
+                },
+                {
+                  "in": "path",
+                  "name": "seasonID"
+                },
+                {
+                  "in": "query",
+                  "name": "include"
+                }
+              ]
+            }
+          },
+          "/tracks": {
+            "get": {
+              "parameters": [
+                {
+                  "in": "query",
+                  "name": "include"
+                }
+              ]
+            }
+          },
+          "/tracks/season/{seasonID}/winners": {
+            "get": {
+              "parameters": [
+                {
+                  "in": "path",
+                  "name": "seasonID"
+                },
+                {
+                  "in": "query",
+                  "name": "include"
+                }
+              ]
+            }
+          },
+          "/tracks/season/{season_ID}": {
+            "get": {
+              "parameters": [
+                {
+                  "in": "path",
+                  "name": "season_ID"
+                },
+                {
+                  "in": "query",
+                  "name": "include"
+                }
+              ]
+            }
+          },
+          "/tracks/{ID}": {
+            "get": {
+              "parameters": [
+                {
+                  "in": "path",
+                  "name": "ID"
+                },
+                {
+                  "in": "query",
+                  "name": "include"
+                }
+              ]
+            }
+          },
+          "/v1.0/livescores/now": {
+            "get": {
+              "parameters": [
+                {
+                  "in": "query",
+                  "name": "include"
+                }
+              ]
+            }
+          }
+        },
+        "security": {
+          "SportMonksFinalSecurityScheme1ApiKey": []
+        },
+        "servers": [
+          {
+            "url": "https://f1.sportmonks.com/api/v1.0"
+          }
+        ]
+      },
+      "endpoints": [
+        {
+          "fixedOperationParameters": [],
+          "name": "GET Seasons",
+          "operation": {
+            "method": "get",
+            "path": "/seasons"
+          },
+          "parameters": [
+            {
+              "name": "include",
+              "operationParameter": {
+                "in": "query",
+                "name": "include"
+              },
+              "required": false
+            }
+          ],
+          "postProcessingSpecifications": [],
+          "preProcessingSpecifications": [],
+          "reservedParameters": [
+            {
+              "name": "_type"
+            },
+            {
+              "name": "_path"
+            },
+            {
+              "name": "_times"
+            }
+          ]
+        },
+        {
+          "fixedOperationParameters": [],
+          "name": "GET Season by ID",
+          "operation": {
+            "method": "get",
+            "path": "/seasons/{ID}"
+          },
+          "parameters": [
+            {
+              "name": "include",
+              "operationParameter": {
+                "in": "query",
+                "name": "include"
+              },
+              "required": false
+            },
+            {
+              "name": "ID",
+              "operationParameter": {
+                "in": "path",
+                "name": "ID"
+              },
+              "required": false
+            }
+          ],
+          "postProcessingSpecifications": [],
+          "preProcessingSpecifications": [],
+          "reservedParameters": [
+            {
+              "name": "_type"
+            },
+            {
+              "name": "_path"
+            },
+            {
+              "name": "_times"
+            }
+          ]
+        },
+        {
+          "fixedOperationParameters": [],
+          "name": "GET Track by ID",
+          "operation": {
+            "method": "get",
+            "path": "/tracks/{ID}"
+          },
+          "parameters": [
+            {
+              "name": "ID",
+              "operationParameter": {
+                "in": "path",
+                "name": "ID"
+              },
+              "required": false
+            },
+            {
+              "name": "include",
+              "operationParameter": {
+                "in": "query",
+                "name": "include"
+              },
+              "required": false
+            }
+          ],
+          "postProcessingSpecifications": [],
+          "preProcessingSpecifications": [],
+          "reservedParameters": [
+            {
+              "name": "_type"
+            },
+            {
+              "name": "_path"
+            },
+            {
+              "name": "_times"
+            }
+          ]
+        },
+        {
+          "fixedOperationParameters": [],
+          "name": "GET Livescores",
+          "operation": {
+            "method": "get",
+            "path": "/v1.0/livescores/now"
+          },
+          "parameters": [
+            {
+              "name": "include",
+              "operationParameter": {
+                "in": "query",
+                "name": "include"
+              },
+              "required": false
+            }
+          ],
+          "postProcessingSpecifications": [],
+          "preProcessingSpecifications": [],
+          "reservedParameters": [
+            {
+              "name": "_type"
+            },
+            {
+              "name": "_path"
+            },
+            {
+              "name": "_times"
+            }
+          ]
+        },
+        {
+          "fixedOperationParameters": [],
+          "name": "GET All Tracks",
+          "operation": {
+            "method": "get",
+            "path": "/tracks"
+          },
+          "parameters": [
+            {
+              "name": "include",
+              "operationParameter": {
+                "in": "query",
+                "name": "include"
+              },
+              "required": false
+            }
+          ],
+          "postProcessingSpecifications": [],
+          "preProcessingSpecifications": [],
+          "reservedParameters": [
+            {
+              "name": "_type"
+            },
+            {
+              "name": "_path"
+            },
+            {
+              "name": "_times"
+            }
+          ]
+        },
+        {
+          "fixedOperationParameters": [],
+          "name": "GET Track by Season ID",
+          "operation": {
+            "method": "get",
+            "path": "/tracks/season/{season_ID}"
+          },
+          "parameters": [
+            {
+              "name": "season_ID",
+              "operationParameter": {
+                "in": "path",
+                "name": "season_ID"
+              },
+              "required": false
+            },
+            {
+              "name": "include",
+              "operationParameter": {
+                "in": "query",
+                "name": "include"
+              },
+              "required": false
+            }
+          ],
+          "postProcessingSpecifications": [],
+          "preProcessingSpecifications": [],
+          "reservedParameters": [
+            {
+              "name": "_type"
+            },
+            {
+              "name": "_path"
+            },
+            {
+              "name": "_times"
+            }
+          ]
+        },
+        {
+          "fixedOperationParameters": [],
+          "name": "Get All Stages",
+          "operation": {
+            "method": "get",
+            "path": "/stages"
+          },
+          "parameters": [
+            {
+              "name": "include",
+              "operationParameter": {
+                "in": "query",
+                "name": "include"
+              },
+              "required": false
+            }
+          ],
+          "postProcessingSpecifications": [],
+          "preProcessingSpecifications": [],
+          "reservedParameters": [
+            {
+              "name": "_type"
+            },
+            {
+              "name": "_path"
+            },
+            {
+              "name": "_times"
+            }
+          ]
+        },
+        {
+          "fixedOperationParameters": [],
+          "name": "Get Stage By ID",
+          "operation": {
+            "method": "get",
+            "path": "/stages/{ID}"
+          },
+          "parameters": [
+            {
+              "name": "ID",
+              "operationParameter": {
+                "in": "path",
+                "name": "ID"
+              },
+              "required": false
+            },
+            {
+              "name": "include",
+              "operationParameter": {
+                "in": "query",
+                "name": "include"
+              },
+              "required": false
+            }
+          ],
+          "postProcessingSpecifications": [],
+          "preProcessingSpecifications": [],
+          "reservedParameters": [
+            {
+              "name": "_type"
+            },
+            {
+              "name": "_path"
+            },
+            {
+              "name": "_times"
+            }
+          ]
+        },
+        {
+          "fixedOperationParameters": [],
+          "name": "Get Stages By Season ID",
+          "operation": {
+            "method": "get",
+            "path": "/stages/season/{season_ID}"
+          },
+          "parameters": [
+            {
+              "name": "season_ID",
+              "operationParameter": {
+                "in": "path",
+                "name": "season_ID"
+              },
+              "required": false
+            },
+            {
+              "name": "include",
+              "operationParameter": {
+                "in": "query",
+                "name": "include"
+              },
+              "required": false
+            }
+          ],
+          "postProcessingSpecifications": [],
+          "preProcessingSpecifications": [],
+          "reservedParameters": [
+            {
+              "name": "_type"
+            },
+            {
+              "name": "_path"
+            },
+            {
+              "name": "_times"
+            }
+          ]
+        },
+        {
+          "fixedOperationParameters": [],
+          "name": "Get Team By ID",
+          "operation": {
+            "method": "get",
+            "path": "/teams/{ID}"
+          },
+          "parameters": [
+            {
+              "name": "ID",
+              "operationParameter": {
+                "in": "path",
+                "name": "ID"
+              },
+              "required": false
+            },
+            {
+              "name": "include",
+              "operationParameter": {
+                "in": "query",
+                "name": "include"
+              },
+              "required": false
+            }
+          ],
+          "postProcessingSpecifications": [],
+          "preProcessingSpecifications": [],
+          "reservedParameters": [
+            {
+              "name": "_type"
+            },
+            {
+              "name": "_path"
+            },
+            {
+              "name": "_times"
+            }
+          ]
+        },
+        {
+          "fixedOperationParameters": [],
+          "name": "GET Teams By Season ID",
+          "operation": {
+            "method": "get",
+            "path": "/teams/season/{ID}"
+          },
+          "parameters": [
+            {
+              "name": "ID",
+              "operationParameter": {
+                "in": "path",
+                "name": "ID"
+              },
+              "required": false
+            },
+            {
+              "name": "include",
+              "operationParameter": {
+                "in": "query",
+                "name": "include"
+              },
+              "required": false
+            }
+          ],
+          "postProcessingSpecifications": [],
+          "preProcessingSpecifications": [],
+          "reservedParameters": [
+            {
+              "name": "_type"
+            },
+            {
+              "name": "_path"
+            },
+            {
+              "name": "_times"
+            }
+          ]
+        },
+        {
+          "fixedOperationParameters": [],
+          "name": "Get Season Race Result",
+          "operation": {
+            "method": "get",
+            "path": "/teams/{ID}/season/{seasonID}/results"
+          },
+          "parameters": [
+            {
+              "name": "ID",
+              "operationParameter": {
+                "in": "path",
+                "name": "ID"
+              },
+              "required": false
+            },
+            {
+              "name": "seasonID",
+              "operationParameter": {
+                "in": "path",
+                "name": "seasonID"
+              },
+              "required": false
+            },
+            {
+              "name": "include",
+              "operationParameter": {
+                "in": "query",
+                "name": "include"
+              },
+              "required": false
+            }
+          ],
+          "postProcessingSpecifications": [],
+          "preProcessingSpecifications": [],
+          "reservedParameters": [
+            {
+              "name": "_type"
+            },
+            {
+              "name": "_path"
+            },
+            {
+              "name": "_times"
+            }
+          ]
+        },
+        {
+          "fixedOperationParameters": [],
+          "name": "Get Driver By ID",
+          "operation": {
+            "method": "get",
+            "path": "/drivers/{ID}"
+          },
+          "parameters": [
+            {
+              "name": "ID",
+              "operationParameter": {
+                "in": "path",
+                "name": "ID"
+              },
+              "required": false
+            },
+            {
+              "name": "include",
+              "operationParameter": {
+                "in": "query",
+                "name": "include"
+              },
+              "required": false
+            }
+          ],
+          "postProcessingSpecifications": [],
+          "preProcessingSpecifications": [],
+          "reservedParameters": [
+            {
+              "name": "_type"
+            },
+            {
+              "name": "_path"
+            },
+            {
+              "name": "_times"
+            }
+          ]
+        },
+        {
+          "fixedOperationParameters": [],
+          "name": "Get Season Race Results",
+          "operation": {
+            "method": "get",
+            "path": "/drivers/{ID}/season/{seasonID}/results"
+          },
+          "parameters": [
+            {
+              "name": "ID",
+              "operationParameter": {
+                "in": "path",
+                "name": "ID"
+              },
+              "required": false
+            },
+            {
+              "name": "seasonID",
+              "operationParameter": {
+                "in": "path",
+                "name": "seasonID"
+              },
+              "required": false
+            },
+            {
+              "name": "include",
+              "operationParameter": {
+                "in": "query",
+                "name": "include"
+              },
+              "required": false
+            }
+          ],
+          "postProcessingSpecifications": [],
+          "preProcessingSpecifications": [],
+          "reservedParameters": [
+            {
+              "name": "_type"
+            },
+            {
+              "name": "_path"
+            },
+            {
+              "name": "_times"
+            }
+          ]
+        },
+        {
+          "fixedOperationParameters": [],
+          "name": "GET Drivers By Season ID",
+          "operation": {
+            "method": "get",
+            "path": "/drivers/season/{ID}"
+          },
+          "parameters": [
+            {
+              "name": "ID",
+              "operationParameter": {
+                "in": "path",
+                "name": "ID"
+              },
+              "required": false
+            },
+            {
+              "name": "query",
+              "operationParameter": {
+                "in": "query",
+                "name": "query"
+              },
+              "required": false
+            }
+          ],
+          "postProcessingSpecifications": [],
+          "preProcessingSpecifications": [],
+          "reservedParameters": [
+            {
+              "name": "_type"
+            },
+            {
+              "name": "_path"
+            },
+            {
+              "name": "_times"
+            }
+          ]
+        },
+        {
+          "fixedOperationParameters": [],
+          "name": "GET Track Winners by Season ID",
+          "operation": {
+            "method": "get",
+            "path": "/tracks/season/{seasonID}/winners"
+          },
+          "parameters": [
+            {
+              "name": "seasonID",
+              "operationParameter": {
+                "in": "path",
+                "name": "seasonID"
+              },
+              "required": false
+            },
+            {
+              "name": "include",
+              "operationParameter": {
+                "in": "query",
+                "name": "include"
+              },
+              "required": false
+            }
+          ],
+          "postProcessingSpecifications": [],
+          "preProcessingSpecifications": [],
+          "reservedParameters": [
+            {
+              "name": "_type"
+            },
+            {
+              "name": "_path"
+            },
+            {
+              "name": "_times"
+            }
+          ]
+        }
+      ],
+      "oisFormat": "2.2.1",
+      "title": "SportMonks Final",
+      "version": "0.1.0"
+    }
+  ],
+  "templates": [],
+  "triggers": {
+    "http": [
+      {
+        "endpointId": "0x57c5bb899a5c043fce53a6e07d9fea61a4a45cca235394643940b97448581775",
+        "endpointName": "GET Seasons",
+        "oisTitle": "SportMonks Final"
+      },
+      {
+        "endpointId": "0xeb2cbbf54641ec2ea238d7642d2cdab5f05d1d7b8c0e01eebb980e2efc404ef6",
+        "endpointName": "GET Season by ID",
+        "oisTitle": "SportMonks Final"
+      },
+      {
+        "endpointId": "0xb6bca02f1581caa90ab6c87699bac03f7d3ee3800fd577daa308d5f0c46705c6",
+        "endpointName": "GET Track by ID",
+        "oisTitle": "SportMonks Final"
+      },
+      {
+        "endpointId": "0x55cb4b96d5d43ef148afdb952b9086be1eba294f3ea8eedd1f56d042f86caf71",
+        "endpointName": "GET Livescores",
+        "oisTitle": "SportMonks Final"
+      },
+      {
+        "endpointId": "0x5e411363a56d65ab806e2f6b1e01d0728d6548f9c8b39e64001b67ffe6c76ef9",
+        "endpointName": "GET All Tracks",
+        "oisTitle": "SportMonks Final"
+      },
+      {
+        "endpointId": "0x3f2a4b351484dcfd3d2b1eae4fc568958cba6634bc6da4942d4e2063ce616785",
+        "endpointName": "GET Track by Season ID",
+        "oisTitle": "SportMonks Final"
+      },
+      {
+        "endpointId": "0x2269f02ca8f88f591c31c680a7ede6b98fced99b1bdc9aea0af34ef80188e165",
+        "endpointName": "Get All Stages",
+        "oisTitle": "SportMonks Final"
+      },
+      {
+        "endpointId": "0x57f1f9e6abfe7fcb9f4866c14a6d9383e35592c29204618920e54db5bc545d34",
+        "endpointName": "Get Stage By ID",
+        "oisTitle": "SportMonks Final"
+      },
+      {
+        "endpointId": "0x1f2fae21194ceb6d20f80288a416d2830fe253723febefea6c9d0e2e74ca9ab7",
+        "endpointName": "Get Stages By Season ID",
+        "oisTitle": "SportMonks Final"
+      },
+      {
+        "endpointId": "0xeed59ffe3675fc3575aea2be9cd1b5c6899b4aef5e58b402c3315c1f610c0cc6",
+        "endpointName": "Get Team By ID",
+        "oisTitle": "SportMonks Final"
+      },
+      {
+        "endpointId": "0x2fe92cab42077a7a758127a9762d6426108cd3fe45221a19a1d32ae768c49f0d",
+        "endpointName": "GET Teams By Season ID",
+        "oisTitle": "SportMonks Final"
+      },
+      {
+        "endpointId": "0x538a8c4c2ec3eb39a13eb5fdacdc1fc08f645a545759f3826c8314cfef91caec",
+        "endpointName": "Get Season Race Result",
+        "oisTitle": "SportMonks Final"
+      },
+      {
+        "endpointId": "0xaf120a9318bb29bd07bfa61babd4cdbeb4f09c50e2efc6ad798dedc6fbad43ce",
+        "endpointName": "Get Driver By ID",
+        "oisTitle": "SportMonks Final"
+      },
+      {
+        "endpointId": "0x2fb81fe04e44ace4c883cfbd7c6a14d607dafbee71c428d00abda1465697eb13",
+        "endpointName": "Get Season Race Results",
+        "oisTitle": "SportMonks Final"
+      },
+      {
+        "endpointId": "0x04437039d9785dce6043d591ced7866930670e6dc36c5ab11de860f20315a456",
+        "endpointName": "GET Drivers By Season ID",
+        "oisTitle": "SportMonks Final"
+      },
+      {
+        "endpointId": "0x6e58ace4ab94d28da59ec1da675b513cc21a3ca9656228c0b052563a2eb88b3e",
+        "endpointName": "GET Track Winners by Season ID",
+        "oisTitle": "SportMonks Final"
+      }
+    ],
+    "httpSignedData": [
+      {
+        "endpointId": "0x57c5bb899a5c043fce53a6e07d9fea61a4a45cca235394643940b97448581775",
+        "endpointName": "GET Seasons",
+        "oisTitle": "SportMonks Final"
+      },
+      {
+        "endpointId": "0xeb2cbbf54641ec2ea238d7642d2cdab5f05d1d7b8c0e01eebb980e2efc404ef6",
+        "endpointName": "GET Season by ID",
+        "oisTitle": "SportMonks Final"
+      },
+      {
+        "endpointId": "0xb6bca02f1581caa90ab6c87699bac03f7d3ee3800fd577daa308d5f0c46705c6",
+        "endpointName": "GET Track by ID",
+        "oisTitle": "SportMonks Final"
+      },
+      {
+        "endpointId": "0x55cb4b96d5d43ef148afdb952b9086be1eba294f3ea8eedd1f56d042f86caf71",
+        "endpointName": "GET Livescores",
+        "oisTitle": "SportMonks Final"
+      },
+      {
+        "endpointId": "0x5e411363a56d65ab806e2f6b1e01d0728d6548f9c8b39e64001b67ffe6c76ef9",
+        "endpointName": "GET All Tracks",
+        "oisTitle": "SportMonks Final"
+      },
+      {
+        "endpointId": "0x3f2a4b351484dcfd3d2b1eae4fc568958cba6634bc6da4942d4e2063ce616785",
+        "endpointName": "GET Track by Season ID",
+        "oisTitle": "SportMonks Final"
+      },
+      {
+        "endpointId": "0x2269f02ca8f88f591c31c680a7ede6b98fced99b1bdc9aea0af34ef80188e165",
+        "endpointName": "Get All Stages",
+        "oisTitle": "SportMonks Final"
+      },
+      {
+        "endpointId": "0x57f1f9e6abfe7fcb9f4866c14a6d9383e35592c29204618920e54db5bc545d34",
+        "endpointName": "Get Stage By ID",
+        "oisTitle": "SportMonks Final"
+      },
+      {
+        "endpointId": "0x1f2fae21194ceb6d20f80288a416d2830fe253723febefea6c9d0e2e74ca9ab7",
+        "endpointName": "Get Stages By Season ID",
+        "oisTitle": "SportMonks Final"
+      },
+      {
+        "endpointId": "0xeed59ffe3675fc3575aea2be9cd1b5c6899b4aef5e58b402c3315c1f610c0cc6",
+        "endpointName": "Get Team By ID",
+        "oisTitle": "SportMonks Final"
+      },
+      {
+        "endpointId": "0x2fe92cab42077a7a758127a9762d6426108cd3fe45221a19a1d32ae768c49f0d",
+        "endpointName": "GET Teams By Season ID",
+        "oisTitle": "SportMonks Final"
+      },
+      {
+        "endpointId": "0x538a8c4c2ec3eb39a13eb5fdacdc1fc08f645a545759f3826c8314cfef91caec",
+        "endpointName": "Get Season Race Result",
+        "oisTitle": "SportMonks Final"
+      },
+      {
+        "endpointId": "0xaf120a9318bb29bd07bfa61babd4cdbeb4f09c50e2efc6ad798dedc6fbad43ce",
+        "endpointName": "Get Driver By ID",
+        "oisTitle": "SportMonks Final"
+      },
+      {
+        "endpointId": "0x2fb81fe04e44ace4c883cfbd7c6a14d607dafbee71c428d00abda1465697eb13",
+        "endpointName": "Get Season Race Results",
+        "oisTitle": "SportMonks Final"
+      },
+      {
+        "endpointId": "0x04437039d9785dce6043d591ced7866930670e6dc36c5ab11de860f20315a456",
+        "endpointName": "GET Drivers By Season ID",
+        "oisTitle": "SportMonks Final"
+      },
+      {
+        "endpointId": "0x6e58ace4ab94d28da59ec1da675b513cc21a3ca9656228c0b052563a2eb88b3e",
+        "endpointName": "GET Track Winners by Season ID",
+        "oisTitle": "SportMonks Final"
+      }
+    ],
+    "rrp": [
+      {
+        "cacheResponses": false,
+        "endpointId": "0x57c5bb899a5c043fce53a6e07d9fea61a4a45cca235394643940b97448581775",
+        "endpointName": "GET Seasons",
+        "oisTitle": "SportMonks Final"
+      },
+      {
+        "cacheResponses": false,
+        "endpointId": "0xeb2cbbf54641ec2ea238d7642d2cdab5f05d1d7b8c0e01eebb980e2efc404ef6",
+        "endpointName": "GET Season by ID",
+        "oisTitle": "SportMonks Final"
+      },
+      {
+        "cacheResponses": false,
+        "endpointId": "0xb6bca02f1581caa90ab6c87699bac03f7d3ee3800fd577daa308d5f0c46705c6",
+        "endpointName": "GET Track by ID",
+        "oisTitle": "SportMonks Final"
+      },
+      {
+        "cacheResponses": false,
+        "endpointId": "0x55cb4b96d5d43ef148afdb952b9086be1eba294f3ea8eedd1f56d042f86caf71",
+        "endpointName": "GET Livescores",
+        "oisTitle": "SportMonks Final"
+      },
+      {
+        "cacheResponses": false,
+        "endpointId": "0x5e411363a56d65ab806e2f6b1e01d0728d6548f9c8b39e64001b67ffe6c76ef9",
+        "endpointName": "GET All Tracks",
+        "oisTitle": "SportMonks Final"
+      },
+      {
+        "cacheResponses": false,
+        "endpointId": "0x3f2a4b351484dcfd3d2b1eae4fc568958cba6634bc6da4942d4e2063ce616785",
+        "endpointName": "GET Track by Season ID",
+        "oisTitle": "SportMonks Final"
+      },
+      {
+        "cacheResponses": false,
+        "endpointId": "0x2269f02ca8f88f591c31c680a7ede6b98fced99b1bdc9aea0af34ef80188e165",
+        "endpointName": "Get All Stages",
+        "oisTitle": "SportMonks Final"
+      },
+      {
+        "cacheResponses": false,
+        "endpointId": "0x57f1f9e6abfe7fcb9f4866c14a6d9383e35592c29204618920e54db5bc545d34",
+        "endpointName": "Get Stage By ID",
+        "oisTitle": "SportMonks Final"
+      },
+      {
+        "cacheResponses": false,
+        "endpointId": "0x1f2fae21194ceb6d20f80288a416d2830fe253723febefea6c9d0e2e74ca9ab7",
+        "endpointName": "Get Stages By Season ID",
+        "oisTitle": "SportMonks Final"
+      },
+      {
+        "cacheResponses": false,
+        "endpointId": "0xeed59ffe3675fc3575aea2be9cd1b5c6899b4aef5e58b402c3315c1f610c0cc6",
+        "endpointName": "Get Team By ID",
+        "oisTitle": "SportMonks Final"
+      },
+      {
+        "cacheResponses": false,
+        "endpointId": "0x2fe92cab42077a7a758127a9762d6426108cd3fe45221a19a1d32ae768c49f0d",
+        "endpointName": "GET Teams By Season ID",
+        "oisTitle": "SportMonks Final"
+      },
+      {
+        "cacheResponses": false,
+        "endpointId": "0x538a8c4c2ec3eb39a13eb5fdacdc1fc08f645a545759f3826c8314cfef91caec",
+        "endpointName": "Get Season Race Result",
+        "oisTitle": "SportMonks Final"
+      },
+      {
+        "cacheResponses": false,
+        "endpointId": "0xaf120a9318bb29bd07bfa61babd4cdbeb4f09c50e2efc6ad798dedc6fbad43ce",
+        "endpointName": "Get Driver By ID",
+        "oisTitle": "SportMonks Final"
+      },
+      {
+        "cacheResponses": false,
+        "endpointId": "0x2fb81fe04e44ace4c883cfbd7c6a14d607dafbee71c428d00abda1465697eb13",
+        "endpointName": "Get Season Race Results",
+        "oisTitle": "SportMonks Final"
+      },
+      {
+        "cacheResponses": false,
+        "endpointId": "0x04437039d9785dce6043d591ced7866930670e6dc36c5ab11de860f20315a456",
+        "endpointName": "GET Drivers By Season ID",
+        "oisTitle": "SportMonks Final"
+      },
+      {
+        "cacheResponses": false,
+        "endpointId": "0x6e58ace4ab94d28da59ec1da675b513cc21a3ca9656228c0b052563a2eb88b3e",
+        "endpointName": "GET Track Winners by Season ID",
+        "oisTitle": "SportMonks Final"
+      }
+    ]
+  }
+}

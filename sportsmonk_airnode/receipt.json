@@ -1,0 +1,18 @@
+{
+  "airnodeWallet": {
+    "airnodeAddress": "0xbBaf8B6C5d1C9fBCBf2A45f4b7b450415F936a92",
+    "airnodeXpub": "xpub6CwZtnGRBF7un11xEdTCCfArQYFq7x1E3B2TRg9Vj6RudpepEyt7EJT1oVGyYp1aF4MHDmPY5MNuWBfuZ7S1BYCypAy8SStCjLnZ5Re8mUk"
+  },
+  "deployment": {
+    "deploymentId": "awsd5d697ff",
+    "cloudProvider": {
+      "type": "aws",
+      "region": "us-east-1",
+      "disableConcurrencyReservations": true
+    },
+    "stage": "sportmonks-base",
+    "nodeVersion": "0.13.0",
+    "timestamp": "2023-11-17T10:01:16.288Z"
+  },
+  "success": true
+}

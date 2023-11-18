@@ -18,7 +18,7 @@ import React, { useState, useEffect } from "react";
 import LoadingScreen from "./Loading";
 import { parseEther } from "viem";
 import YoutubeContract from "../contract/contract.json";
-import { send } from "process";
+
 
 const Intro = () => {
   const { address, isConnected } = useAccount();
@@ -26,9 +26,12 @@ const Intro = () => {
   const [minted, setMinted] = useState<boolean>(false);
   const [position, setPosition] = useState<number>(0);
   const [inputValue, setInputValue] = useState<string>("");
+  const [predictionInput, setPredictionInput] = useState<string>("");
+  const [apeAmount, setApeAmount] = useState<number>(0);
+  const [ethAmount, setEthAmount] = useState<number>(0);
   const [youtubeId, setYoutubeId] = useState<string>("");
 
-  const contractAddress = "0xFefDadb1c553a2d19ED43F6Aab0C7251470db1BA";
+  const contractAddress = "0xBA18f2DC2Ce0B971f33236fdf76E227bf9D8dDBd";
 
   const contractConfig = {
     address: contractAddress,
@@ -38,6 +41,21 @@ const Intro = () => {
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setInputValue(event.target.value);
     setYoutubeId(event.target.value);
+  };
+
+  const handlePredictionInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setPredictionInput(event.target.value);
+    //setYoutubeId(event.target.value);
+  };
+
+  const handleETHInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setEthAmount(Number(event.target.value));
+    //setYoutubeId(event.target.value);
+  };
+
+  const handleApeInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setApeAmount(Number(event.target.value));
+    //setYoutubeId(event.target.value);
   };
 
   const handleSubmit = () => {
@@ -105,72 +123,66 @@ const Intro = () => {
                     {!loading && !minted && (
                       <>
                         <h1 className="text-3xl md:text-5xl font-bold text-center text-white ">
-                          Place Your Bets
+                          Place Your Prediction
                         </h1>
                         <p className="text-white text-center text-xl">
-                          Choose your range of how many views this Youtube video
-                          will get in month
+                          F1 Season Six Grand Prix
                         </p>
                         <p className="text-white text-center">
                           Using an offchain oracle, we will determine the number
                           of views in a trustless manner
                         </p>
 
-                        <div className="flex justify-center items-center">
-                          <div className="flex space-x-4">
-                            <button
-                              className="bg-blue-500 px-4 py-2 text-white rounded-full"
-                              onClick={() => {
-                                setPosition(0);
-                                handleBet(position);
-                              }}
-                            >
-                              1-100
-                            </button>
-                            <button
-                              className="bg-blue-500 px-4 py-2 text-white rounded-full"
-                              onClick={() => {
-                                setPosition(1);
-                                handleBet(position);
-                              }}
-                            >
-                              101-1000
-                            </button>
+                        <div className="flex flex-col justify-center items-center">
+                          <div>
+                          <p className="text-white "> Place your prediction</p>
+                          <input
+                            type="text"
+                            placeholder="Racer ID Number"
+                            value={predictionInput}
+                            onChange={handlePredictionInputChange}
+                            className="border px-2 py-1"
+                          />
                           </div>
 
-                          <div className="mx-4">
-                            <button
-                              className="bg-blue-500 px-4 py-2 text-white rounded-full"
-                              onClick={() => {
-                                setPosition(2);
-                                handleBet(position);
-                              }}
-                            >
-                              1001-5000
-                            </button>
+                          <div>
+                          <p className="text-white "> ETH Wager</p>
+                          <input
+                            type="text"
+                            placeholder="ETH Amount"
+                            value={ethAmount}
+                            onChange={handleETHInputChange}
+                            className="border px-2 py-1"
+                          />
                           </div>
 
-                          <div className="flex space-x-4">
-                            <button
-                              className="bg-blue-500 px-4 py-2 text-white rounded-full"
-                              onClick={() => {
-                                setPosition(3);
-                                handleBet(position);
-                              }}
-                            >
-                              5001-10000
-                            </button>
-                            <button
-                              className="bg-blue-500 px-4 py-2 text-white rounded-full"
-                              onClick={() => {
-                                setPosition(4);
-                                handleBet(position);
-                              }}
-                            >
-                              10001-∞
-                            </button>
+                          <div>
+                          <p className="text-white "> Insure with Ape Coin?</p>
+                          <input
+                            type="text"
+                            placeholder="Insure Position with APE coin?"
+                            value={apeAmount}
+                            onChange={handleApeInputChange}
+                            className="border px-2 py-1"
+                          />
+                          { apeAmount >0 &&
+                          (<button
+                          //  onClick={handleSubmit} //place bet
+                            className="bg-blue-500 px-4 py-2 text-white ml-2"
+                          >
+                            Allow
+                          </button>)
+                          }
+
                           </div>
+                          <button
+                          //  onClick={handleSubmit} //place bet
+                            className="bg-blue-500 px-4 py-2 text-white ml-2"
+                          >
+                            Submit
+                          </button>
                         </div>
+
                         <div className="items-center text-center pt-20">
                         <p className="text-white "> admin only</p>
                           <input
@@ -180,6 +192,7 @@ const Intro = () => {
                             onChange={handleInputChange}
                             className="border px-2 py-1"
                           />
+                          
                           <button
                             onClick={handleSubmit}
                             className="bg-blue-500 px-4 py-2 text-white ml-2"

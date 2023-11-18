@@ -42,7 +42,7 @@ const Header = () => {
 
           <Link legacyBehavior href="/">
             <a className="text-xl font-bold text-white inline-block whitespace-nowrap uppercase drop-shadow-[0_2.2px_1.2px_rgba(0,0,0,0.8)]">
-              Offchain Prediction App
+              Onchain Prediction App
             </a>
           </Link>
 
@@ -93,7 +93,7 @@ const Header = () => {
             <li className="flex items-center">
               <a
                 className="py-2 text-sm uppercase px-6 font-bold leading-snug text-gray-800 lg:text-base lg:text-white hover:opacity-75 lg:px-3 drop-shadow-[0_2.2px_1.2px_rgba(0,0,0,0.8)]"
-                href="https://sepolia-blockscout.scroll.io/address/0xFefDadb1c553a2d19ED43F6Aab0C7251470db1BA/transactions#address-tabs"
+                href="https://goerli.basescan.org/address/0xba18f2dc2ce0b971f33236fdf76e227bf9d8ddbd"
                 target="_blank"
                 rel="noreferrer"
                 onClick={() => setNavbarOpen(!navbarOpen)}
