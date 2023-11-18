@@ -264,7 +264,7 @@ const Intro = () => {
                         </div>
 
                         <div className="items-center text-center pt-5">
-                          <p className="text-white "> admin only</p>
+                          <p className="text-white "> After race results</p>
                           {/* <input
                             type="text"
                             placeholder="Enter YouTube ID"
