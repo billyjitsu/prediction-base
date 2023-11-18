@@ -2,15 +2,19 @@ import { ethers } from "hardhat";
 
 async function main() {
 
-  const airnode = "0x2ab9f26E18B64848cd349582ca3B55c2d06f507d" // Airnode sepolia
-  // The new way of deploying contracts    Name of Contract, Constructor Arguments, Overrides
-  const tokenEx = await ethers.deployContract("QrngExample", [airnode], {});
 
-  await tokenEx.waitForDeployment();
+  const ape = await ethers.deployContract("SimpleToken", ["Ape Coin", "APE"], {});
+  await ape.waitForDeployment();
+  console.log(`SimpleToken contract address: ${ape.target}`);
 
-  console.log(
-    `TokenEx contract address: ${tokenEx.target}`
-  );
+
+  // const airnode = "0xa0AD79D995DdeeB18a14eAef56A549A04e3Aa1Bd" // Airnode Base
+  // // The new way of deploying contracts    Name of Contract, Constructor Arguments, Overrides
+  // const tokenEx = await ethers.deployContract("Prediction", [airnode, ape.target], {});
+
+  // await tokenEx.waitForDeployment();
+
+  // console.log(`TokenEx contract address: ${tokenEx.target}`);
 }
 
 // We recommend this pattern to be able to use async/await everywhere

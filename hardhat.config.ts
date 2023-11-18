@@ -33,8 +33,8 @@ networks: {
   hardhat: {
     chainId: 1337
   },
-  sepolia: {
-    url: `${process.env.SEPOLIA_RPC_URL}`,
+  goerlibase: {
+    url: `${process.env.BASE_TEST_RPC_URL}`,
     accounts: [`${process.env.PRIVATE_KEY}`],
     // gas: 200000000,
     // gasPrice: 100000000000,
@@ -42,7 +42,7 @@ networks: {
 
 },
 etherscan: {
-apiKey: process.env.ETHERSCAN_API_KEY || ""
+apiKey: process.env.BASE_API_KEY || ""
 }
 };
 
